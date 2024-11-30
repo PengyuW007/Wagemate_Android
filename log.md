@@ -1,4 +1,4 @@
-## Log of Development
+# Log of Development
 
 ### 2024. 11. 27
 #### Completed
