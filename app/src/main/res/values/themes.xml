@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.Wagemate" parent="Base.Theme.Wagemate" />
+
+    <style name="Button.White" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@android:color/white</item>
+    </style>
 </resources>
