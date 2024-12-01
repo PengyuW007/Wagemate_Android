@@ -15,3 +15,12 @@
 #### Undone
 1. Create a new account 
 2. Forget password
+
+### 2024. 11. 30
+#### Completed
+1. New Account, forget password response button craeted
+
+#### Undone
+1. transition to next page
+2. Found welcome page no response issue, 
+cannot process to next page if click previous button

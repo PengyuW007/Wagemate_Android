@@ -6,20 +6,19 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import pengyuw007.wagemate.R;
 
-public class MainActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_welcome);
 
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
             // TODO: Your application init goes here.
-            Intent mInHome = new Intent(MainActivity.this,LoginActivity.class);
+            Intent mInHome = new Intent(WelcomeActivity.this,LoginActivity.class);
             startActivity(mInHome);
             overridePendingTransition(R.transition.fade_in,R.transition.fade_out);
         }, 3000);
