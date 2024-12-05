@@ -1,5 +1,6 @@
 package pengyuw007.wagemate.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +27,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-
+        Intent intent = new Intent();
+        if (v.getId() == R.id.LoginButton)
+            dataReceived(intent);
     }
 
     private void initUI() {
@@ -47,5 +50,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         login.setOnClickListener(this);
         createNewAcc.setOnClickListener(this);
         forgetPwd.setOnClickListener(this);
+    }//end initUI
+
+    private void dataReceived(Intent intent){
+        nameGet = name.getText().toString();
+        pwdGet = pwd.getText().toString();
+
+
     }
 }
