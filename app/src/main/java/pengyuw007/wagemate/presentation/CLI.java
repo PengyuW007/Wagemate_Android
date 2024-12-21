@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import pengyuw007.wagemate.objects.Person;
+import pengyuw007.wagemate.objects.User;
 
 // command-line interface
 public class CLI {
@@ -12,7 +12,7 @@ public class CLI {
     public static String inputLine;
     public static String[] inputTokens;
 
-    public static Person currUser;
+    public static User currUser;
 
     public static String indent = "  ";
     public static void run(){

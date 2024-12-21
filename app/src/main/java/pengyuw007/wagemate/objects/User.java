@@ -1,11 +1,11 @@
 package pengyuw007.wagemate.objects;
 
-public class Person {
+public class User {
     private String Name;
     private String Sin;
     private String PWD;
 
-    public Person(String name,String sin,String pwd){
+    public User(String name, String sin, String pwd){
         Name = name;
         Sin = sin;
         PWD = pwd;

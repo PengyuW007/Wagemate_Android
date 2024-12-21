@@ -2,7 +2,7 @@ package pengyuw007.wagemate.persistence;
 
 import java.util.ArrayList;
 
-import pengyuw007.wagemate.objects.Person;
+import pengyuw007.wagemate.objects.User;
 
 public interface IPersistenceAccess {
     /*** Data Access ***/
@@ -13,12 +13,12 @@ public interface IPersistenceAccess {
     /*******************************************************/
 
     /*** CREATE ***/
-    int addPerson(Person person);
+    int addPerson(User user);
 
     /*** READ ***/
-    Person getPersonByName(String name);
+    User getPersonByName(String name);
 
-    ArrayList<Person> getPeople();
+    ArrayList<User> getPeople();
 
     boolean isSame(String name,String group);
 

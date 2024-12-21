@@ -56,6 +56,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         nameGet = name.getText().toString();
         pwdGet = pwd.getText().toString();
 
-
+        
     }
 }
