@@ -36,7 +36,7 @@ public class CLI {
                 && (!inputLine.equalsIgnoreCase("quit"))
                 && (!inputLine.equalsIgnoreCase("q"))
                 && (!inputLine.equalsIgnoreCase("bye")))
-        {	// use cntl-c or exit to exit
+        {	// use ctrl-c or exit to exit
             inputTokens = inputLine.split("\\s+");
             parse();
             readLine();

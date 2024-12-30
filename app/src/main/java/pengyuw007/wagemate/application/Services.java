@@ -1,7 +1,7 @@
 package pengyuw007.wagemate.application;
 
 import pengyuw007.wagemate.persistence.IPersistenceAccess;
-import pengyuw007.wagemate.persistence.stub.DataAccessStub;
+import pengyuw007.wagemate.persistence.real.DataAccessReal;
 
 public class Services {
     private static IPersistenceAccess dataAccessService = null;
@@ -10,13 +10,13 @@ public class Services {
     {
         if (dataAccessService == null)
         {
-            dataAccessService = new DataAccessStub(dbName);
+            dataAccessService = new DataAccessReal(dbName);
             dataAccessService.open(Main.getDBPathName());
         }
         return dataAccessService;
     }
 
-    public static IPersistenceAccess createDataAccess(DataAccessStub alternateDataAccessService)
+    public static IPersistenceAccess createDataAccess(DataAccessReal alternateDataAccessService)
     {
         if (dataAccessService == null)
         {

@@ -2,10 +2,10 @@ package pengyuw007.wagemate.objects;
 
 public class User {
     private String Name;
-    private String Sin;
+    private long Sin;
     private String PWD;
 
-    public User(String name, String sin, String pwd){
+    public User(long sin, String name, String pwd){
         Name = name;
         Sin = sin;
         PWD = pwd;
@@ -15,7 +15,7 @@ public class User {
         return Name;
     }
 
-    public String getSin() {
+    public long getSin() {
         return Sin;
     }
 
@@ -31,7 +31,7 @@ public class User {
         this.PWD = PWD;
     }
 
-    public void setSin(String sin) {
+    public void setSin(long sin) {
         Sin = sin;
     }
 }

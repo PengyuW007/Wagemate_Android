@@ -1,38 +1,25 @@
 package pengyuw007.wagemate.persistence.stub;
 
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.DriverManager;
-import java.sql.SQLWarning;
-import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import pengyuw007.wagemate.objects.User;
 import pengyuw007.wagemate.persistence.IPersistenceAccess;
 
 public class DataAccessStub implements IPersistenceAccess {
-    private Statement st1, st2, st3;
-    private Connection c1;
-    private ResultSet rs2, rs3, rs4, rs5;
-
     private String dbName;
     private String dbType;
 
     private ArrayList<User> users;
 
-    private String cmdString;
-    private int updateCount;
-    private String result;
-    private static String EOF = "  ";
-
     public DataAccessStub(String dbName){
         this.dbName = dbName;
     }
+
     @Override
     public void open(String dbPath) {
-
+        users= new ArrayList<>();
     }
 
     @Override
@@ -41,27 +28,30 @@ public class DataAccessStub implements IPersistenceAccess {
     }
 
     @Override
-    public int addPerson(User user) {
-        return 0;
+    public String addUser(User user) {
+        String res = null;
+        if(!isFound(user.getSin(),user.getName())){
+            users.add(user);
+        }else{
+            res = "There is already a user with SIN: "+user.getSin()+", Name: "+user.getName();
+        }
+        return res;
     }
 
     @Override
-    public User getPersonByName(String name) {
-        return null;
+    public User getUserBySin(long sin) {
+        User user = null;
+
+        for (int i = 0; i < users.size(); i++) {
+            if(users.get(i).getSin()==sin){
+                user = users.get(i);
+            }
+        }
+        return user;
     }
 
     @Override
-    public ArrayList<User> getPeople() {
-        return null;
-    }
-
-    @Override
-    public boolean isSame(String name, String group) {
-        return false;
-    }
-
-    @Override
-    public boolean isMatch(String name, String password) {
+    public boolean isMatch(String name, String sin, String password) {
         return false;
     }
 
@@ -76,17 +66,34 @@ public class DataAccessStub implements IPersistenceAccess {
     }
 
     @Override
-    public void reStatus(String name, boolean status) {
+    public void reSin(String name, long newSin) {
 
     }
 
     @Override
-    public boolean deletePerson(String name) {
+    public boolean deleteUser(String name) {
         return false;
     }
 
     @Override
-    public void clearPeople() {
+    public void clearUsers() {
 
+    }
+
+    private boolean isFound(long sin,String name) {
+        boolean found = true;
+
+        for (int i = 0;i<users.size();i++){
+            User currUser = users.get(i);
+            if(currUser.getSin()==sin&& Objects.equals(currUser.getName(), name)){
+                found = false;
+            }
+        }
+
+        return found;
+    }
+    
+    public String getUserSequential(List<User> userRes) {
+        return null;
     }
 }
