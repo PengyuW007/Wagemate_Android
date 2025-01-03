@@ -92,7 +92,7 @@ public class DataAccessStub implements IPersistenceAccess {
 
         return found;
     }
-    
+
     public String getUserSequential(List<User> userRes) {
         return null;
     }
