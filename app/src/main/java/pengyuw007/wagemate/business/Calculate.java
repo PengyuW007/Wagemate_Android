@@ -6,13 +6,22 @@ import pengyuw007.wagemate.objects.Job;
 
 public class Calculate {
 
-    public static long annualWage(List<Job>jobs){
-        int jobCount;
-        if((jobs!=null)&&(!jobs.isEmpty())){
-            for (jobCount = 0; jobCount<jobs.size(); jobCount++) {
+    public static double annualWage(Job job){
+        double annual_wage = job.getAnnual_Wage();
+        double hour_wage = job.getHour_Wage();
+        double hours = job.getHours();
+        double res_annual_wage = -1;
 
+        if(hours>0){
+            if(annual_wage == hours*hour_wage){
+                res_annual_wage = annual_wage;
+            }else {
+                res_annual_wage = hour_wage*hours;
             }
+        }else{
+            System.out.println("Hours invalid!");
         }
-        return 0;
+
+        return res_annual_wage;
     }
 }
