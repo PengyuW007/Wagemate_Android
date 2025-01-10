@@ -96,20 +96,20 @@ public class DataAccessReal implements IPersistenceAccess {
     }
 
     @Override
-    public User getUserBySin(long sin) {
+    public User getUserByName(String name) {
         User user = null;
         String myName = EOF, myPWD = EOF;
-        long mySin;
+        //String name;
 
         try {
-            cmdString = "Select * from Students where SIN=" + sin;
+            cmdString = "Select * from Students where NAME=" + name;
             rs3 = st1.executeQuery(cmdString);
             // ResultSetMetaData md2 = rs3.getMetaData();
             while (rs3.next()) {
-                mySin = rs3.getLong("SIN");
+                //mySin = rs3.getLong("SIN");
                 myName = rs3.getString("Name");
                 myPWD = rs3.getString("Address");
-                user = new User(mySin, myName, myPWD);
+                //user = new User(mySin, myName, myPWD);
             }
             rs3.close();
         } catch (Exception e) {
@@ -129,7 +129,7 @@ public class DataAccessReal implements IPersistenceAccess {
 //            cmdString = "Insert into Users "+" Values("+values+")";
 //
 //        }
-        return 0;
+        return null;
     }
 
     private boolean isFound(long sin, String name) {
@@ -152,7 +152,7 @@ public class DataAccessReal implements IPersistenceAccess {
     }
 
     @Override
-    public boolean isMatch(String sin, String name, String password) {
+    public boolean isMatch(String sin, long name, String password) {
         return false;
     }
 

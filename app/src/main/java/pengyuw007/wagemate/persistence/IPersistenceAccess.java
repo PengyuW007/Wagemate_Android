@@ -17,16 +17,16 @@ public interface IPersistenceAccess {
     String addUser(User user);
 
     /*** READ ***/
-    User getUserBySin(long sin);
+    User getUserByName(String name);
 
-    boolean isMatch(String name,String sin, String password); // Find whether info of this user matched
+    boolean isMatch(String name,long sin, String password); // Find whether info of this user matched
 
     /*** UPDATE ***/
     void rename(String name, String newName);
 
     void rePassword(String name, String newPassword);
 
-    void reSin(String name, long newSin );
+    void reSin(String name, long newSin);
 
     /*** DELETE ***/
     boolean deleteUser(String name);
