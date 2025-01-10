@@ -3,10 +3,6 @@ package pengyuw007.wagemate;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import static org.junit.Assert.*;
-
-import junit.framework.TestSuite;
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *

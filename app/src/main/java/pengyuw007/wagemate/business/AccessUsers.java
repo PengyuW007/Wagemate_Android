@@ -9,19 +9,32 @@ import pengyuw007.wagemate.persistence.IPersistenceAccess;
 
 public class AccessUsers {
     private IPersistenceAccess dataAccess;
-    private List<User> users;
-    private User user;
-    private int currUserPos;
 
     public AccessUsers(){
         dataAccess = Services.getDataAccess(Main.dbName);
-        users = null;
-        user = null;
-        currUserPos = 0;
     }
 
-    public String getUsers(List<User> users){
-        users.clear();
-        return null;
+    public void addUser(User user){
+        dataAccess.addUser(user);
+    }
+
+    public boolean deleteUser(User user){
+        return dataAccess.deleteUser(user.getName());
+    }
+
+    public User getUserByName(String name){
+        return dataAccess.getUserByName(name);
+    }
+
+    public void updateUserName(String name, String newName){
+        dataAccess.rename(name,newName);
+    }
+
+    public void updateUserSin(String name,long newSin){
+        dataAccess.reSin(name,newSin);
+    }
+
+    public void updateUserPWD(String name,String newPWD){
+        dataAccess.rePassword(name, newPWD);
     }
 }
