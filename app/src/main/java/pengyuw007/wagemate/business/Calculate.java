@@ -42,7 +42,17 @@ public class Calculate {
         } else if (province.equals("NB")) {
 
         } else if (province.equals("NS")) {
-
+            if (res_annual_wage <= 29590) {
+                provincial_tax_rate = 0.0879;
+            } else if (res_annual_wage <= 59180) {
+                provincial_tax_rate = 0.1495;
+            } else if (res_annual_wage <= 93000) {
+                provincial_tax_rate = 0.1667;
+            }  else if (res_annual_wage <= 150000) {
+                provincial_tax_rate = 0.175;
+            } else {
+                provincial_tax_rate = 0.21;
+            }
         } else if (province.equals("NL")) {
             if (res_annual_wage <= 43198) {
                 provincial_tax_rate = 0.087;
@@ -62,7 +72,17 @@ public class Calculate {
                 provincial_tax_rate = 0.218;
             }
         } else if (province.equals("PE")) {
-
+            if (res_annual_wage <= 32656) {
+                provincial_tax_rate = 0.0965;
+            } else if (res_annual_wage <= 64313) {
+                provincial_tax_rate = 0.1363;
+            } else if (res_annual_wage <= 105000) {
+                provincial_tax_rate = 0.1665;
+            }  else if (res_annual_wage <= 140000) {
+                provincial_tax_rate = 0.18;
+            } else {
+                provincial_tax_rate = 0.1875;
+            }
         } else if (province.equals("ON")) {
 
         } else if (province.equals("QC")) {
