@@ -34,13 +34,33 @@ public class Calculate {
         } else if (province.equals("YT")) {
 
         } else if (province.equals("SK")) {
-
+            if (res_annual_wage <= 52057) {
+                provincial_tax_rate = 0.105;
+            } else if (res_annual_wage <= 148734) {
+                provincial_tax_rate = 0.125;
+            } else {
+                provincial_tax_rate = 0.145;
+            }
         } else if (province.equals("BC")) {
 
         } else if (province.equals("MB")) {
-
+            if (res_annual_wage <= 47000) {
+                provincial_tax_rate = 0.108;
+            } else if (res_annual_wage <= 100000) {
+                provincial_tax_rate = 0.1275;
+            } else {
+                provincial_tax_rate = 0.174;
+            }
         } else if (province.equals("NB")) {
-
+            if (res_annual_wage <= 49958) {
+                provincial_tax_rate = 0.094;
+            } else if (res_annual_wage <= 99916) {
+                provincial_tax_rate = 0.14;
+            } else if (res_annual_wage <= 185064) {
+                provincial_tax_rate = 0.16;
+            } else {
+                provincial_tax_rate = 0.195;
+            }
         } else if (province.equals("NS")) {
             if (res_annual_wage <= 29590) {
                 provincial_tax_rate = 0.0879;
@@ -84,7 +104,17 @@ public class Calculate {
                 provincial_tax_rate = 0.1875;
             }
         } else if (province.equals("ON")) {
-
+            if (res_annual_wage <= 51446) {
+                provincial_tax_rate = 0.0505;
+            } else if (res_annual_wage <= 102894) {
+                provincial_tax_rate = 0.0915;
+            } else if (res_annual_wage <= 150000) {
+                provincial_tax_rate = 0.1116;
+            }  else if (res_annual_wage <= 220000) {
+                provincial_tax_rate = 0.1216;
+            } else {
+                provincial_tax_rate = 0.1316;
+            }
         } else if (province.equals("QC")) {
 
         }
