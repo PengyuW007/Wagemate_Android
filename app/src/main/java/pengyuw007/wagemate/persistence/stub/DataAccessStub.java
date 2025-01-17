@@ -2,6 +2,7 @@ package pengyuw007.wagemate.persistence.stub;
 
 import java.util.ArrayList;
 
+import pengyuw007.wagemate.objects.Job;
 import pengyuw007.wagemate.objects.User;
 import pengyuw007.wagemate.persistence.IPersistenceAccess;
 
@@ -10,6 +11,7 @@ public class DataAccessStub implements IPersistenceAccess {
     private String dbType;
 
     private ArrayList<User> users;
+    private ArrayList<Job>jobs;
 
     public DataAccessStub(String dbName) {
         this.dbName = dbName;
@@ -25,6 +27,7 @@ public class DataAccessStub implements IPersistenceAccess {
 
     }
 
+    /*** Users ***/
     @Override
     public String addUser(User user) {
         String res = null;
@@ -69,19 +72,26 @@ public class DataAccessStub implements IPersistenceAccess {
     @Override
     public void rename(String name, String newName) {
         User user = getUserByName(name);
-        user.setName(newName);
+
+        if(user!=null){
+            user.setName(newName);
+        }
     }
 
     @Override
     public void rePassword(String name, String newPassword) {
         User user = getUserByName(name);
-        user.setPWD(newPassword);
+        if(user!=null){
+            user.setPWD(newPassword);
+        }
     }
 
     @Override
     public void reSin(String name, long newSin) {
         User user = getUserByName(name);
-        user.setSin(newSin);
+        if(user!=null){
+            user.setSin(newSin);
+        }
     }
 
     @Override
@@ -100,6 +110,87 @@ public class DataAccessStub implements IPersistenceAccess {
     @Override
     public void clearUsers() {
         users.clear();
+    }
+
+    /********************************
+    ************* Jobs **************
+    ********************************/
+    @Override
+    public String addJob(Job newJob) {
+        String res;
+
+        if(getJobByURL(newJob.getURL())==null){
+            jobs.add(newJob);
+            res = "Success! "+newJob.getPosition()+", URL: "+newJob.getURL();
+        }else{
+            res = "FAILED! Position: " + newJob.getPosition() + ", URL: " + newJob.getURL();
+        }
+
+        return res;
+    }
+
+    @Override
+    public Job getJobByURL(String url) {
+        Job job = null;
+        boolean found = false;
+        for (int i = 0; i < jobs.size(); i++) {
+            if(jobs.get(i).getURL().equals(url)){
+                job = jobs.get(i);
+                found = true;
+            }
+        }
+
+        if(!found){
+            System.out.println("No such job with url: "+url+" exists!");
+        }
+        return job;
+    }
+
+    @Override
+    public boolean isMatchJob(String url, String name) {
+        boolean match = false;
+
+        for (int i = 0; i < jobs.size(); i++) {
+            if(jobs.get(i).getURL().equals(url)&&jobs.get(i).getPosition().equals(name)){
+                match = true;
+            }
+        }
+        return match;
+    }
+
+    @Override
+    public void renameJob(String url, String name) {
+        Job job= getJobByURL(url);
+
+        if(job!=null){
+            job.setPosition(name);
+        }
+    }
+
+    @Override
+    public void reURL(String url, String newURL) {
+        Job job = getJobByURL(url);
+
+        if(job!=null){
+            job.setURL(newURL);
+        }
+    }
+
+    @Override
+    public boolean deleteJob(String url) {
+        boolean isRemoved = false;
+        Job job = getJobByURL(url);
+
+        if(job!=null){
+            jobs.remove(job);
+            isRemoved =true;
+        }
+        return isRemoved;
+    }
+
+    @Override
+    public void clearJobs() {
+        jobs.clear();
     }
 
     private boolean isFound(long sin, String name) {

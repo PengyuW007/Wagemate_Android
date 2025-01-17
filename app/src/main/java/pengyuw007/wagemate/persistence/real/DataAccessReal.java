@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import pengyuw007.wagemate.objects.Job;
 import pengyuw007.wagemate.objects.User;
 import pengyuw007.wagemate.persistence.IPersistenceAccess;
 
@@ -151,6 +152,9 @@ public class DataAccessReal implements IPersistenceAccess {
         return found;
     }
 
+    /********************************
+     ************* Jobs **************
+     ********************************/
     @Override
     public boolean isMatch(String sin, long name, String password) {
         return false;
@@ -178,6 +182,41 @@ public class DataAccessReal implements IPersistenceAccess {
 
     @Override
     public void clearUsers() {
+
+    }
+
+    @Override
+    public String addJob(Job job) {
+        return "";
+    }
+
+    @Override
+    public Job getJobByURL(String name) {
+        return null;
+    }
+
+    @Override
+    public boolean isMatchJob(String url, String name) {
+        return false;
+    }
+
+    @Override
+    public void renameJob(String url, String name) {
+
+    }
+
+    @Override
+    public void reURL(String url, String newURL) {
+
+    }
+
+    @Override
+    public boolean deleteJob(String url) {
+        return false;
+    }
+
+    @Override
+    public void clearJobs() {
 
     }
 
