@@ -1,21 +1,36 @@
 [versions]
 agp = "8.7.2"
 junit = "4.13.2"
+junitJupiterApi = "5.10.0"
+junitJupiterEngine = "5.10.0"
+junitJupiterVersion = "5.10.0"
+junitPlatformSuiteApi = "1.10.0"
+junitPlatformSuiteEngineVersion = "1.7.0"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
 material = "1.10.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
+unitJunit = "4.13"
+junitJupiter = "5.8.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+junit-jupiter-v5100 = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junitJupiterVersion" }
+junit-platform-suite-api = { module = "org.junit.platform:junit-platform-suite-api", version.ref = "junitPlatformSuiteApi" }
+jupiter-junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junitJupiterApi" }
+jupiter-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junitJupiterEngine" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+platform-junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junitPlatformSuiteApi" }
+platform-junit-platform-suite-engine = { module = "org.junit.platform:junit-platform-suite-engine", version.ref = "junitPlatformSuiteEngineVersion" }
+unit-junit = { module = "unit:junit", version.ref = "unitJunit" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
