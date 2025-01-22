@@ -2,6 +2,7 @@ package pengyuw007.wagemate.persistence.stub;
 
 import java.util.ArrayList;
 
+import pengyuw007.wagemate.application.Main;
 import pengyuw007.wagemate.objects.Job;
 import pengyuw007.wagemate.objects.User;
 import pengyuw007.wagemate.persistence.IPersistenceAccess;
@@ -15,6 +16,10 @@ public class DataAccessStub implements IPersistenceAccess {
 
     public DataAccessStub(String dbName) {
         this.dbName = dbName;
+    }
+    public DataAccessStub()
+    {
+        this(Main.dbName);
     }
 
     @Override
