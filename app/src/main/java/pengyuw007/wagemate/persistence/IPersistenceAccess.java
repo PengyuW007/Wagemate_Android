@@ -18,20 +18,17 @@ public interface IPersistenceAccess {
     String addUser(User user);
 
     /*** READ ***/
+    ArrayList<User> getUsers();
     User getUserByName(String name);
-
     boolean isMatch(String name,long sin, String password); // Find whether info of this user matched
 
     /*** UPDATE ***/
     void rename(String name, String newName);
-
     void rePassword(String name, String newPassword);
-
     void reSin(String name, long newSin);
 
     /*** DELETE ***/
     boolean deleteUser(String name);
-
     void clearUsers();
 
     /*******************************************************/
@@ -41,8 +38,8 @@ public interface IPersistenceAccess {
     String addJob(Job job);
 
     /*** READ ***/
+    ArrayList<Job>getJobs();
     Job getJobByURL(String name);
-
     boolean isMatchJob(String url, String name); // Find whether info of this job matched
 
     /*** UPDATE ***/

@@ -1,5 +1,7 @@
 package pengyuw007.wagemate.business;
 
+import java.util.List;
+
 import pengyuw007.wagemate.application.Main;
 import pengyuw007.wagemate.application.Services;
 import pengyuw007.wagemate.objects.User;
@@ -18,6 +20,10 @@ public class AccessUsers {
 
     public boolean deleteUser(User user){
         return dataAccess.deleteUser(user.getName());
+    }
+
+    public List<User>getUsers(){
+        return dataAccess.getUsers();
     }
 
     public User getUserByName(String name){

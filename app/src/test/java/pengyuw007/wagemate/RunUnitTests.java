@@ -5,6 +5,7 @@ import org.junit.platform.suite.api.Suite;
 
 import pengyuw007.wagemate.business.BusinessTests;
 import pengyuw007.wagemate.objects.ObjectTests;
+import pengyuw007.wagemate.persistence.PersistenceTests;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -15,7 +16,7 @@ import pengyuw007.wagemate.objects.ObjectTests;
 @SelectClasses({
         ObjectTests.class, // Add your test suites or individual test classes here
         BusinessTests.class,   // Uncomment when needed
-        // PersistenceTests.class // Uncomment when needed
+        PersistenceTests.class // Uncomment when needed
 })
 
 public class RunUnitTests {

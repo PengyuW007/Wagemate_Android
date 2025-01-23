@@ -9,7 +9,7 @@ import pengyuw007.wagemate.persistence.IPersistenceAccess;
 
 public class DataAccessStub implements IPersistenceAccess {
     private String dbName;
-    private String dbType;
+    private String dbType ="stub";
 
     private ArrayList<User> users;
     private ArrayList<Job>jobs;
@@ -25,11 +25,31 @@ public class DataAccessStub implements IPersistenceAccess {
     @Override
     public void open(String dbPath) {
         users = new ArrayList<>();
+        jobs =  new ArrayList<>();
+
+        User user;
+        Job job;
+
+        user = new User(100,"Ann","A");
+        users.add(user);
+        user = new User(200,"Bob","B");
+        users.add(user);
+        user = new User(300,"Cathy","C");
+        users.add(user);
+
+        job = new Job("1","Front-end Dev");
+        jobs.add(job);
+        job = new Job("2","Back-end Dev");
+        jobs.add(job);
+        job = new Job("3","Full stack Dev");
+        jobs.add(job);
+
+        System.out.println("Opened "+dbType+" database "+dbName);
     }
 
     @Override
     public void close() {
-
+        System.out.println("Closed "+dbType+" database "+dbName);
     }
 
     /*** Users ***/
@@ -42,6 +62,11 @@ public class DataAccessStub implements IPersistenceAccess {
             res = "There is already a user with SIN: " + user.getSin() + ", Name: " + user.getName();
         }
         return res;
+    }
+
+    @Override
+    public ArrayList<User>getUsers(){
+        return users;
     }
 
     @Override
@@ -132,6 +157,11 @@ public class DataAccessStub implements IPersistenceAccess {
         }
 
         return res;
+    }
+
+    @Override
+    public ArrayList<Job> getJobs() {
+        return jobs;
     }
 
     @Override

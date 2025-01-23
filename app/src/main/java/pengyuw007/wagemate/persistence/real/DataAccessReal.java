@@ -133,6 +133,11 @@ public class DataAccessReal implements IPersistenceAccess {
         return null;
     }
 
+    @Override
+    public ArrayList getUsers() {
+        return null;
+    }
+
     private boolean isFound(long sin, String name) {
         boolean found = false;
 
@@ -188,6 +193,11 @@ public class DataAccessReal implements IPersistenceAccess {
     @Override
     public String addJob(Job job) {
         return "";
+    }
+
+    @Override
+    public ArrayList<Job> getJobs() {
+        return null;
     }
 
     @Override

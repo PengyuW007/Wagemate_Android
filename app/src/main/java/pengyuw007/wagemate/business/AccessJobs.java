@@ -1,5 +1,7 @@
 package pengyuw007.wagemate.business;
 
+import java.util.List;
+
 import pengyuw007.wagemate.application.Main;
 import pengyuw007.wagemate.application.Services;
 import pengyuw007.wagemate.objects.Job;
@@ -12,6 +14,9 @@ public class AccessJobs {
         dataAccess = Services.getDataAccess(Main.dbName);
     }
 
+    public List<Job> getJobs(){
+        return dataAccess.getJobs();
+    }
     public String addJob(String url,String pos){
         return dataAccess.addJob(new Job(url,pos));
     }

@@ -4,7 +4,7 @@ import pengyuw007.wagemate.presentation.CLI;
 
 public class Main {
 
-    public static final String dbName = "Users";
+    public static final String dbName = "JobHunter";
     private static String dbPathName = "database/"+dbName;
 
     public static void main(String[] args) {
