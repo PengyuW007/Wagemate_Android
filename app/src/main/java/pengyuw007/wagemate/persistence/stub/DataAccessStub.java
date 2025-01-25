@@ -9,63 +9,65 @@ import pengyuw007.wagemate.persistence.IPersistenceAccess;
 
 public class DataAccessStub implements IPersistenceAccess {
     private String dbName;
-    private String dbType ="stub";
+    private String dbType = "stub";
 
     private ArrayList<User> users;
-    private ArrayList<Job>jobs;
+    private ArrayList<Job> jobs;
 
     public DataAccessStub(String dbName) {
         this.dbName = dbName;
     }
-    public DataAccessStub()
-    {
+
+    public DataAccessStub() {
         this(Main.dbName);
     }
 
     @Override
     public void open(String dbPath) {
         users = new ArrayList<>();
-        jobs =  new ArrayList<>();
+        jobs = new ArrayList<>();
 
         User user;
         Job job;
 
-        user = new User(100,"Ann","A");
+        user = new User(100, "Ann", "A");
         users.add(user);
-        user = new User(200,"Bob","B");
+        user = new User(200, "Bob", "B");
         users.add(user);
-        user = new User(300,"Cathy","C");
+        user = new User(300, "Cathy", "C");
         users.add(user);
 
-        job = new Job("1","Front-end Dev");
+        job = new Job("1", "Front-end Dev");
         jobs.add(job);
-        job = new Job("2","Back-end Dev");
+        job = new Job("2", "Back-end Dev");
         jobs.add(job);
-        job = new Job("3","Full stack Dev");
+        job = new Job("3", "Full stack Dev");
         jobs.add(job);
 
-        System.out.println("Opened "+dbType+" database "+dbName);
+        System.out.println("Opened " + dbType + " database " + dbName);
     }
 
     @Override
     public void close() {
-        System.out.println("Closed "+dbType+" database "+dbName);
+        System.out.println("Closed " + dbType + " database " + dbName);
     }
 
     /*** Users ***/
     @Override
     public String addUser(User user) {
         String res = null;
+
         if (!isFound(user.getSin(), user.getName())) {
             users.add(user);
         } else {
-            res = "There is already a user with SIN: " + user.getSin() + ", Name: " + user.getName();
+            res = "Error! There is already a user with SIN: " + user.getSin() + ", Name: " + user.getName();
         }
+
         return res;
     }
 
     @Override
-    public ArrayList<User>getUsers(){
+    public ArrayList<User> getUsers() {
         return users;
     }
 
@@ -81,8 +83,8 @@ public class DataAccessStub implements IPersistenceAccess {
             }
         }
 
-        if (!found){
-            System.out.println("No such user named "+name+" exists!");
+        if (!found) {
+            System.out.println("No such user named " + name + " exists!");
         }
         return user;
     }
@@ -102,16 +104,23 @@ public class DataAccessStub implements IPersistenceAccess {
     @Override
     public void rename(String name, String newName) {
         User user = getUserByName(name);
+        User anotherUser = getUserByName(newName);
 
-        if(user!=null){
-            user.setName(newName);
+        if (user != null) {
+            if(anotherUser==null){
+                user.setName(newName);
+            }else{
+                System.out.println("Cannot rename to "+newName+", name already exists!");
+            }
+        }else{
+            System.out.println("No user named: "+name);
         }
     }
 
     @Override
     public void rePassword(String name, String newPassword) {
         User user = getUserByName(name);
-        if(user!=null){
+        if (user != null) {
             user.setPWD(newPassword);
         }
     }
@@ -119,7 +128,7 @@ public class DataAccessStub implements IPersistenceAccess {
     @Override
     public void reSin(String name, long newSin) {
         User user = getUserByName(name);
-        if(user!=null){
+        if (user != null) {
             user.setSin(newSin);
         }
     }
@@ -129,7 +138,7 @@ public class DataAccessStub implements IPersistenceAccess {
         boolean isRemoved = false;
         User user = getUserByName(name);
 
-        if(user!=null){
+        if (user != null) {
             users.remove(user);
             isRemoved = true;
         }
@@ -143,16 +152,16 @@ public class DataAccessStub implements IPersistenceAccess {
     }
 
     /********************************
-    ************* Jobs **************
-    ********************************/
+     ************* Jobs **************
+     ********************************/
     @Override
     public String addJob(Job newJob) {
         String res;
 
-        if(getJobByURL(newJob.getURL())==null){
+        if (getJobByURL(newJob.getURL()) == null) {
             jobs.add(newJob);
-            res = "Success! "+newJob.getPosition()+", URL: "+newJob.getURL();
-        }else{
+            res = "Success! " + newJob.getPosition() + ", URL: " + newJob.getURL();
+        } else {
             res = "FAILED! Position: " + newJob.getPosition() + ", URL: " + newJob.getURL();
         }
 
@@ -169,14 +178,14 @@ public class DataAccessStub implements IPersistenceAccess {
         Job job = null;
         boolean found = false;
         for (int i = 0; i < jobs.size(); i++) {
-            if(jobs.get(i).getURL().equals(url)){
+            if (jobs.get(i).getURL().equals(url)) {
                 job = jobs.get(i);
                 found = true;
             }
         }
 
-        if(!found){
-            System.out.println("No such job with url: "+url+" exists!");
+        if (!found) {
+            System.out.println("No such job with url: " + url + " exists!");
         }
         return job;
     }
@@ -186,7 +195,7 @@ public class DataAccessStub implements IPersistenceAccess {
         boolean match = false;
 
         for (int i = 0; i < jobs.size(); i++) {
-            if(jobs.get(i).getURL().equals(url)&&jobs.get(i).getPosition().equals(name)){
+            if (jobs.get(i).getURL().equals(url) && jobs.get(i).getPosition().equals(name)) {
                 match = true;
             }
         }
@@ -195,9 +204,9 @@ public class DataAccessStub implements IPersistenceAccess {
 
     @Override
     public void renameJob(String url, String name) {
-        Job job= getJobByURL(url);
+        Job job = getJobByURL(url);
 
-        if(job!=null){
+        if (job != null) {
             job.setPosition(name);
         }
     }
@@ -206,7 +215,7 @@ public class DataAccessStub implements IPersistenceAccess {
     public void reURL(String url, String newURL) {
         Job job = getJobByURL(url);
 
-        if(job!=null){
+        if (job != null) {
             job.setURL(newURL);
         }
     }
@@ -216,9 +225,9 @@ public class DataAccessStub implements IPersistenceAccess {
         boolean isRemoved = false;
         Job job = getJobByURL(url);
 
-        if(job!=null){
+        if (job != null) {
             jobs.remove(job);
-            isRemoved =true;
+            isRemoved = true;
         }
         return isRemoved;
     }
@@ -229,12 +238,12 @@ public class DataAccessStub implements IPersistenceAccess {
     }
 
     private boolean isFound(long sin, String name) {
-        boolean found = true;
+        boolean found = false;
 
         for (int i = 0; i < users.size(); i++) {
             User currUser = users.get(i);
             if (currUser.getSin() == sin && currUser.getName().equals(name)) {
-                found = false;
+                found = true;
             }
         }
 

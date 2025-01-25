@@ -30,6 +30,8 @@ public class AccessUsers {
         return dataAccess.getUserByName(name);
     }
 
+    public boolean isMatch(String name,long sin,String pwd){return dataAccess.isMatch(name, sin, pwd);}
+
     public void updateUserName(String name, String newName){
         dataAccess.rename(name,newName);
     }

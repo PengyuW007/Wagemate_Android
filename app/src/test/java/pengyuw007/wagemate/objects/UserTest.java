@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 public class UserTest {
     @Test
-    public void testUser() {
+    public void testUserCreation() {
         User user;
 
-        System.out.println("\nStarting testUser");
+        System.out.println("\nStarting testUserCreation");
 
         user = new User(123, "A", "awd");
         assertNotNull(user);
@@ -25,6 +25,6 @@ public class UserTest {
         user.setPWD("awd");
         assertEquals("awd", user.getPWD());
 
-        System.out.println("Finished testUser");
+        System.out.println("Finished testUserCreation");
     }
 }

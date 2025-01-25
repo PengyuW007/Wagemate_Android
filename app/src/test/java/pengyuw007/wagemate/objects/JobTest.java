@@ -6,16 +6,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JobTest {
 
     @Test
-    public void testJob(){
+    public void testJobCreation(){
         Job job;
 
-        System.out.println("\nStarting testJob");
+        System.out.println("\nStarting testJobCreation");
 
         job = new Job("ab12","Java Developer");
         assertNotNull(job);
         assertEquals("ab12",job.getURL());
         assertEquals("Java Developer",job.getPosition());
 
-        System.out.println("Finished testJob");
+        System.out.println("Finished testJobCreation");
     }
 }

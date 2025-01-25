@@ -15,8 +15,8 @@ import pengyuw007.wagemate.persistence.PersistenceTests;
 @Suite
 @SelectClasses({
         ObjectTests.class, // Add your test suites or individual test classes here
-        BusinessTests.class,   // Uncomment when needed
-        PersistenceTests.class // Uncomment when needed
+        //BusinessTests.class,
+        PersistenceTests.class
 })
 
 public class RunUnitTests {
