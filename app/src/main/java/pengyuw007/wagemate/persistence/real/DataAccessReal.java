@@ -166,18 +166,18 @@ public class DataAccessReal implements IPersistenceAccess {
     }
 
     @Override
-    public void rename(String name, String newName) {
-
+    public String rename(String name, String newName) {
+        return null;
     }
 
     @Override
-    public void rePassword(String name, String newPassword) {
-
+    public String rePassword(String name, String newPassword) {
+return null;
     }
 
     @Override
-    public void reSin(String name, long newSin) {
-
+    public String reSin(String name, long newSin) {
+return null;
     }
 
     @Override

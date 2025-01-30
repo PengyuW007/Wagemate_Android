@@ -1,7 +1,6 @@
 package pengyuw007.wagemate.persistence;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import pengyuw007.wagemate.objects.User;
 import pengyuw007.wagemate.objects.Job;
@@ -23,9 +22,9 @@ public interface IPersistenceAccess {
     boolean isMatch(String name,long sin, String password); // Find whether info of this user matched
 
     /*** UPDATE ***/
-    void rename(String name, String newName);
-    void rePassword(String name, String newPassword);
-    void reSin(String name, long newSin);
+    String rename(String name, String newName);
+    String rePassword(String name, String newPassword);
+    String reSin(String name, long newSin);
 
     /*** DELETE ***/
     boolean deleteUser(String name);

@@ -102,7 +102,8 @@ public class DataAccessStub implements IPersistenceAccess {
     }
 
     @Override
-    public void rename(String name, String newName) {
+    public String rename(String name, String newName) {
+        String res = null;
         User user = getUserByName(name);
         User anotherUser = getUserByName(newName);
 
@@ -110,28 +111,44 @@ public class DataAccessStub implements IPersistenceAccess {
             if(anotherUser==null){
                 user.setName(newName);
             }else{
-                System.out.println("Cannot rename to "+newName+", name already exists!");
+                res = "FAIL Rename! Cannot rename to "+newName+", name already exists!";
             }
         }else{
-            System.out.println("No user named: "+name);
+            res = "FAIL Rename! No user named: "+name;
         }
+
+        return res;
     }
 
     @Override
-    public void rePassword(String name, String newPassword) {
+    public String reSin(String name, long newSin) {
+        String res = null;
+        User user = getUserByName(name);
+
+        if (user != null) {
+            if(!sinConflict(newSin)){
+                user.setSin(newSin);
+            }else {
+                res = "FAIL Re-SIN! SIN: "+newSin+" already exists.";
+            }
+        }else{
+            res = "FAIL Re-SIN! No user named: "+name+" to re-Sin.";
+        }
+        return res;
+    }
+
+    @Override
+    public String rePassword(String name, String newPassword) {
+        String res = null;
         User user = getUserByName(name);
         if (user != null) {
             user.setPWD(newPassword);
+        }else{
+            res = "";
         }
+        return res;
     }
 
-    @Override
-    public void reSin(String name, long newSin) {
-        User user = getUserByName(name);
-        if (user != null) {
-            user.setSin(newSin);
-        }
-    }
 
     @Override
     public boolean deleteUser(String name) {
@@ -248,5 +265,18 @@ public class DataAccessStub implements IPersistenceAccess {
         }
 
         return found;
+    }
+
+    private boolean sinConflict(long sin){
+        boolean conflict = false;
+
+        for (int i = 0; i < users.size(); i++) {
+            User currUser = users.get(i);
+            if (currUser.getSin() == sin){
+                conflict = true;
+            }
+        }
+
+        return conflict;
     }
 }

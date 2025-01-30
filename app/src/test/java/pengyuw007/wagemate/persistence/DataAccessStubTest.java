@@ -141,13 +141,14 @@ public class DataAccessStubTest {
         dataAccess.rename(ann, bob); //Ann's name already replaced to Dave
         assertNull(dataAccess.getUserByName(ann));
 
-        // Found user but name already exists
+        // Found user but name already exists, rename fails
         dataAccess.rename(bob,cathy);
         assertEquals(bob,dataAccess.getUserByName(bob).getName());
     }
 
     @Test
     public void testReSin() {
+        String msg = null;
         ArrayList<User> users = dataAccess.getUsers();
         String ann = "Ann";
         String dave = "Dave";
@@ -155,7 +156,16 @@ public class DataAccessStubTest {
         long b = 200;
         long c = 101;
 
-        //Found user with the required name
+        //Found user with the required name, re-sin success
+        dataAccess.reSin(ann,400);
+        assertEquals(400,dataAccess.getUserByName(ann).getSin());
 
+        // Not found the user
+        dataAccess.reSin(dave,400);
+        assertNull(dataAccess.getUserByName(dave));
+
+        // Found the user, but sin repeated
+        msg = dataAccess.reSin(ann,200);
+        assertEquals("FAIL Re-SIN! SIN: "+200+" already exists.",msg);
     }
 }
