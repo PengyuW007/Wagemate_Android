@@ -37,11 +37,11 @@ public class DataAccessStub implements IPersistenceAccess {
         user = new User(300, "Cathy", "C");
         users.add(user);
 
-        job = new Job("1", "Front-end Dev");
+        job = new Job("a1", "Front-end Dev");
         jobs.add(job);
-        job = new Job("2", "Back-end Dev");
+        job = new Job("b2", "Back-end Dev");
         jobs.add(job);
-        job = new Job("3", "Full stack Dev");
+        job = new Job("c3", "Full stack Dev");
         jobs.add(job);
 
         System.out.println("Opened " + dbType + " database " + dbName);
@@ -59,6 +59,7 @@ public class DataAccessStub implements IPersistenceAccess {
 
         if (!isFound(user.getSin(), user.getName())) {
             users.add(user);
+            res = "Success! New user " + user.getName() + ", SIN: " + user.getSin();
         } else {
             res = "Error! There is already a user with SIN: " + user.getSin() + ", Name: " + user.getName();
         }
@@ -108,13 +109,14 @@ public class DataAccessStub implements IPersistenceAccess {
         User anotherUser = getUserByName(newName);
 
         if (user != null) {
-            if(anotherUser==null){
+            if (anotherUser == null) {
                 user.setName(newName);
-            }else{
-                res = "FAIL Rename! Cannot rename to "+newName+", name already exists!";
+                res = "Success! Rename success.";
+            } else {
+                res = "FAIL Rename! Cannot rename to " + newName + ", name already exists!";
             }
-        }else{
-            res = "FAIL Rename! No user named: "+name;
+        } else {
+            res = "FAIL Rename! No user named: " + name;
         }
 
         return res;
@@ -126,13 +128,13 @@ public class DataAccessStub implements IPersistenceAccess {
         User user = getUserByName(name);
 
         if (user != null) {
-            if(!sinConflict(newSin)){
+            if (!sinConflict(newSin)) {
                 user.setSin(newSin);
-            }else {
-                res = "FAIL Re-SIN! SIN: "+newSin+" already exists.";
+            } else {
+                res = "FAIL Re-SIN! SIN: " + newSin + " already exists.";
             }
-        }else{
-            res = "FAIL Re-SIN! No user named: "+name+" to re-Sin.";
+        } else {
+            res = "FAIL Re-SIN! No user named: " + name + " to re-Sin.";
         }
         return res;
     }
@@ -143,8 +145,8 @@ public class DataAccessStub implements IPersistenceAccess {
         User user = getUserByName(name);
         if (user != null) {
             user.setPWD(newPassword);
-        }else{
-            res = "";
+        } else {
+            res = "FAIL! No user named: " + name;
         }
         return res;
     }
@@ -177,9 +179,9 @@ public class DataAccessStub implements IPersistenceAccess {
 
         if (getJobByURL(newJob.getURL()) == null) {
             jobs.add(newJob);
-            res = "Success! " + newJob.getPosition() + ", URL: " + newJob.getURL();
+            res = "Success! New job: " + newJob.getPosition() + ", URL: '" + newJob.getURL()+"'";
         } else {
-            res = "FAILED! Position: " + newJob.getPosition() + ", URL: " + newJob.getURL();
+            res = "FAILED! Position: " + newJob.getPosition() + ", URL: '" + newJob.getURL() + "' already exists.";
         }
 
         return res;
@@ -194,6 +196,7 @@ public class DataAccessStub implements IPersistenceAccess {
     public Job getJobByURL(String url) {
         Job job = null;
         boolean found = false;
+
         for (int i = 0; i < jobs.size(); i++) {
             if (jobs.get(i).getURL().equals(url)) {
                 job = jobs.get(i);
@@ -202,7 +205,7 @@ public class DataAccessStub implements IPersistenceAccess {
         }
 
         if (!found) {
-            System.out.println("No such job with url: " + url + " exists!");
+            System.out.println("No such job with url: '" + url + "' exists!");
         }
         return job;
     }
@@ -220,21 +223,36 @@ public class DataAccessStub implements IPersistenceAccess {
     }
 
     @Override
-    public void renameJob(String url, String name) {
+    public String rePosition(String url, String name) {
+        String res;
         Job job = getJobByURL(url);
 
         if (job != null) {
             job.setPosition(name);
+            res = "Success! Updated position.";
+        } else {
+            res = "FAIL! Not found position: " + name;
         }
+        return res;
     }
 
     @Override
-    public void reURL(String url, String newURL) {
+    public String reURL(String url, String newURL) {
+        String res;
         Job job = getJobByURL(url);
+        Job newJob = getJobByURL(newURL);
 
         if (job != null) {
-            job.setURL(newURL);
+            if(newJob==null){
+                job.setURL(newURL);
+                res = "Success! Updated URL.";
+            }else{
+                res ="FAIL! URL: '"+newURL+"' already exists.";
+            }
+        } else {
+            res = "FAIL! No URL: '" + url+"'";
         }
+        return res;
     }
 
     @Override
@@ -267,12 +285,12 @@ public class DataAccessStub implements IPersistenceAccess {
         return found;
     }
 
-    private boolean sinConflict(long sin){
+    private boolean sinConflict(long sin) {
         boolean conflict = false;
 
         for (int i = 0; i < users.size(); i++) {
             User currUser = users.get(i);
-            if (currUser.getSin() == sin){
+            if (currUser.getSin() == sin) {
                 conflict = true;
             }
         }

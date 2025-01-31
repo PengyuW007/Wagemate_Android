@@ -172,12 +172,12 @@ public class DataAccessReal implements IPersistenceAccess {
 
     @Override
     public String rePassword(String name, String newPassword) {
-return null;
+        return null;
     }
 
     @Override
     public String reSin(String name, long newSin) {
-return null;
+        return null;
     }
 
     @Override
@@ -211,13 +211,13 @@ return null;
     }
 
     @Override
-    public void renameJob(String url, String name) {
-
+    public String rePosition(String url, String name) {
+        return null;
     }
 
     @Override
-    public void reURL(String url, String newURL) {
-
+    public String reURL(String url, String newURL) {
+        return null;
     }
 
     @Override

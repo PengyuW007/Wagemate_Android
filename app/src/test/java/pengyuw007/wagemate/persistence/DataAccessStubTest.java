@@ -9,8 +9,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.List.*;
 
+import pengyuw007.wagemate.objects.Job;
 import pengyuw007.wagemate.objects.User;
 import pengyuw007.wagemate.persistence.stub.DataAccessStub;
 
@@ -73,9 +73,8 @@ public class DataAccessStubTest {
 
     @Test
     public void testGetUserByName() {
-        ArrayList<User> users = dataAccess.getUsers();
         String name = "Ann";
-        assertEquals(users.get(0), dataAccess.getUserByName(name));// name is found such user
+        assertEquals(name, dataAccess.getUserByName(name).getName());// name is found such user
 
         name = "Dave";
         assertNull(dataAccess.getUserByName(name)); //not found user should be null
@@ -99,6 +98,7 @@ public class DataAccessStubTest {
         ArrayList<User> users = dataAccess.getUsers();
         User user;
         String res;
+
         // Add duplicate user, sin and name matched
         user = new User(100, "Ann", "A");
         res = dataAccess.addUser(user);
@@ -128,44 +128,164 @@ public class DataAccessStubTest {
     @Test
     public void testRename() {
         ArrayList<User> users = dataAccess.getUsers();
+        String msg;
         String ann = "Ann";
         String bob = "Bob";
         String cathy = "Cathy";
         String dave = "Dave";
 
         //Found user and replace with desired name
-        dataAccess.rename(ann, dave);
+        msg = dataAccess.rename(ann, dave);
         assertEquals(dave, users.get(0).getName());
+        assertEquals("Success! Rename success.", msg);
 
         //Cannot find user
         dataAccess.rename(ann, bob); //Ann's name already replaced to Dave
         assertNull(dataAccess.getUserByName(ann));
 
         // Found user but name already exists, rename fails
-        dataAccess.rename(bob,cathy);
-        assertEquals(bob,dataAccess.getUserByName(bob).getName());
+        dataAccess.rename(bob, cathy);
+        assertEquals(bob, dataAccess.getUserByName(bob).getName());
     }
 
     @Test
     public void testReSin() {
-        String msg = null;
-        ArrayList<User> users = dataAccess.getUsers();
+        String msg;
         String ann = "Ann";
         String dave = "Dave";
-        long a = 100;
         long b = 200;
-        long c = 101;
 
         //Found user with the required name, re-sin success
-        dataAccess.reSin(ann,400);
-        assertEquals(400,dataAccess.getUserByName(ann).getSin());
+        dataAccess.reSin(ann, 400);
+        assertEquals(400, dataAccess.getUserByName(ann).getSin());
 
         // Not found the user
-        dataAccess.reSin(dave,400);
-        assertNull(dataAccess.getUserByName(dave));
+        msg = dataAccess.reSin(dave, 400);
+        assertEquals("FAIL Re-SIN! No user named: " + dave + " to re-Sin.", msg);
 
         // Found the user, but sin repeated
-        msg = dataAccess.reSin(ann,200);
-        assertEquals("FAIL Re-SIN! SIN: "+200+" already exists.",msg);
+        msg = dataAccess.reSin(ann, b);
+        assertEquals("FAIL Re-SIN! SIN: " + 200 + " already exists.", msg);
+    }
+
+    @Test
+    public void testRePassword() {
+        String msg;
+        String ann = "Ann";
+
+        //Found user and replaced
+        dataAccess.rePassword(ann, "abc");
+        assertEquals("abc", dataAccess.getUserByName(ann).getPWD());
+
+        // Not Found the user, replace failed
+        msg = dataAccess.rePassword("Dave", "abc");
+        assertEquals("FAIL! No user named: Dave", msg);
+    }
+
+    @Test
+    public void testAddJob() {
+        Job job;
+        String msg;
+
+        // Added a new job
+        job = new Job("d", "Full stack");
+        msg = dataAccess.addJob(job);
+        assertEquals("Success! New job: Full stack, URL: 'd'", msg);
+        assertEquals(4, dataAccess.getJobs().size());
+
+        // Duplicate url job, added failed
+        msg = dataAccess.addJob(job);
+        assertEquals("FAILED! Position: Full stack, URL: 'd' already exists.", msg);
+    }
+
+    @Test
+    public void testGetJobs() {
+        assertEquals(3, dataAccess.getJobs().size());
+    }
+
+    @Test
+    public void testGetJobByURL() {
+        String a1 = "a1";
+        String d4 = "d4";
+
+        // Found job
+        assertEquals(a1, dataAccess.getJobByURL(a1).getURL());
+
+        //No such job
+        assertNull(dataAccess.getJobByURL(d4));
+    }
+
+    @Test
+    public void testIsMatchJob() {
+        Job job = new Job("a1", "Front-end Dev");
+
+        // Found job URL = 1 Pos = 1
+        assertTrue(dataAccess.isMatchJob(job.getURL(), job.getPosition()));
+
+        // Not find job, URL=0 Pos =0
+        job = new Job("d4", "Full stack");
+        assertFalse(dataAccess.isMatchJob(job.getURL(), job.getPosition()));
+
+        // URL=0 Pos =1
+        job = new Job("d4", "Front-end Dev");
+        assertFalse(dataAccess.isMatchJob(job.getURL(), job.getPosition()));
+
+        //URL=1 Pos =0
+        job = new Job("a1", "Full stack");
+        assertFalse(dataAccess.isMatchJob(job.getURL(), job.getPosition()));
+    }
+
+    @Test
+    public void testRePosition() {
+        String msg;
+        String a1 = "a1";
+
+        // Found job, updated position
+        msg = dataAccess.rePosition(a1, "Back-end");
+        assertEquals("Success! Updated position.", msg);
+        assertEquals("Back-end", dataAccess.getJobByURL(a1).getPosition());
+
+        // not found job, update fails
+        msg = dataAccess.rePosition("d4", "Back-end");
+        assertEquals("FAIL! Not found position: Back-end", msg);
+    }
+
+    @Test
+    public void testReURL() {
+        String msg;
+        String a1 = "a1";
+        String b2 = "b2";
+        String c3 = "c3";
+        String d4 = "d4";
+
+        // Found url, update success
+        msg = dataAccess.reURL(a1, d4);
+        assertEquals("Success! Updated URL.", msg);
+
+        // Found url, new URL duplicated
+        msg = dataAccess.reURL(d4, b2);
+        assertEquals("FAIL! URL: 'b2' already exists.", msg);
+
+        // Not found URL, updates failed
+        msg = dataAccess.reURL(a1, c3);
+        assertEquals("FAIL! No URL: 'a1'", msg);
+    }
+
+    @Test
+    public void testDeleteJob() {
+        String a1 = "a1";
+
+        //found job, delete success
+        assertTrue(dataAccess.deleteJob(a1));
+
+        // not find job, delete failed
+        assertFalse(dataAccess.deleteUser(a1));
+    }
+
+    @Test
+    public void testClearJobs(){
+        assertEquals(3,dataAccess.getJobs().size());
+        dataAccess.clearJobs();
+        assertEquals(0,dataAccess.getJobs().size());
     }
 }

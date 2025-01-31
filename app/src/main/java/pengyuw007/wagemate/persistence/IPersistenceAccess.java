@@ -38,13 +38,13 @@ public interface IPersistenceAccess {
 
     /*** READ ***/
     ArrayList<Job>getJobs();
-    Job getJobByURL(String name);
+    Job getJobByURL(String url);
     boolean isMatchJob(String url, String name); // Find whether info of this job matched
 
     /*** UPDATE ***/
-    void renameJob(String url, String name);
+    String rePosition(String url, String name);
 
-    void reURL(String url, String newURL);
+    String reURL(String url, String newURL);
 
     /*** DELETE ***/
     boolean deleteJob(String url);

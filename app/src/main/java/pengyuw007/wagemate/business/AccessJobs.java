@@ -29,12 +29,12 @@ public class AccessJobs {
         return dataAccess.getJobByURL(url);
     }
 
-    public void updateJobPosition(String url,String position){
-        dataAccess.renameJob(url, position);
+    public String updateJobPosition(String url,String position){
+        return dataAccess.rePosition(url, position);
     }
 
-    public void updateJobURL(String url,String newURL){
-        dataAccess.reURL(url, newURL);
+    public String updateJobURL(String url,String newURL){
+        return dataAccess.reURL(url, newURL);
     }
 
     public void clearJobs(){
