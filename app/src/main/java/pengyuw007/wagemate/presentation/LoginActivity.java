@@ -14,7 +14,7 @@ import pengyuw007.wagemate.R;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText name,pwd;
     private String nameGet, pwdGet;
-    private Button login;
+    private Button login,guestLogin;
     private TextView createNewAcc,forgetPwd;
 
     @Override
@@ -28,8 +28,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         Intent intent = new Intent();
-        if (v.getId() == R.id.LoginButton)
+        if (v.getId() == R.id.LoginButton){
             dataReceived(intent);
+        } else if (v.getId()==R.id.GuestLoginButton) {
+            intent.setClass(getApplicationContext(),MainActivity.class);
+        }
+        startActivity(intent);
     }
 
     private void initUI() {
@@ -40,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         /*** Login Button ***/
         login = findViewById(R.id.LoginButton);
+        guestLogin = findViewById(R.id.GuestLoginButton);
 
         /*** Additional Buttons ***/
         createNewAcc = findViewById(R.id.Create_new_user);
@@ -48,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         name.setOnClickListener(this);
         pwd.setOnClickListener(this);
         login.setOnClickListener(this);
+        guestLogin.setOnClickListener(this);
         createNewAcc.setOnClickListener(this);
         forgetPwd.setOnClickListener(this);
     }//end initUI
@@ -56,6 +62,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         nameGet = name.getText().toString();
         pwdGet = pwd.getText().toString();
 
-        
+
     }
 }

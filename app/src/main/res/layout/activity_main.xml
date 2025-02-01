@@ -8,7 +8,7 @@
     tools:context=".presentation.MainActivity">
 
     <TextView
-        android:id="@+id/User_Name"
+        android:id="@+id/User_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
