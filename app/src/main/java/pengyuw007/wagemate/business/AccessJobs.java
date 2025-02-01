@@ -9,6 +9,7 @@ import pengyuw007.wagemate.persistence.IPersistenceAccess;
 
 public class AccessJobs {
     private IPersistenceAccess dataAccess;
+    private Job job;
 
     public AccessJobs(){
         dataAccess = Services.getDataAccess(Main.dbName);
@@ -39,5 +40,11 @@ public class AccessJobs {
 
     public void clearJobs(){
         dataAccess.clearJobs();
+    }
+
+    public double net_annual_wage(String url,String province){
+        job = dataAccess.getJobByURL(url);
+
+        return Calculate.annual_wage(job,province);
     }
 }
