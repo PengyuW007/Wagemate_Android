@@ -15,6 +15,8 @@ public class Job {
         Hours = -1;
     }
 
+    public Job(){
+    }
     public double getAnnual_Wage() {
         return Annual_Wage;
     }

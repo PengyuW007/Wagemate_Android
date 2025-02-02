@@ -1,17 +1,24 @@
 package pengyuw007.wagemate.business;
 
+import android.util.Log;
+
 import pengyuw007.wagemate.objects.Job;
 
 public class Calculate {
     public static double annual_wage(Job job, String province) {
+        final int MONTH = 12;
+        final int WEEK_MONTH = 4;
         double res_annual_wage;
         double federal_tax_rate;
         double provincial_tax_rate = 0;
 
+        province = provinceConvert(province);
+        Log.i("Annual Wage Calculation", "Converted Province: " + province);
+
         double hours = job.getHours();
         double hour_wage = job.getHour_Wage();
 
-        res_annual_wage = hours * hour_wage;
+        res_annual_wage = hours * hour_wage*MONTH*WEEK_MONTH;
 
         if (res_annual_wage <= 55867) {
             federal_tax_rate = 0.15;
@@ -192,9 +199,44 @@ public class Calculate {
         }
 
         if (hours > 0 && hour_wage > 0) {
-            res_annual_wage = (1 - (provincial_tax_rate + federal_tax_rate)) * res_annual_wage;
+            double federal_tax = res_annual_wage * federal_tax_rate;
+            double provincial_tax = res_annual_wage * provincial_tax_rate;
+            res_annual_wage = res_annual_wage - (federal_tax + provincial_tax);
         }
 
         return res_annual_wage;
+    }
+
+    private static String provinceConvert(String province){
+        switch (province) {
+            case "Ontario":
+                return "ON";
+            case "Quebec":
+                return "QC";
+            case "Nova Scotia":
+                return "NS";
+            case "New Brunswick":
+                return "NB";
+            case "Manitoba":
+                return "MB";
+            case "British Columbia":
+                return "BC";
+            case "Prince Edward Island":
+                return "PE";
+            case "Saskatchewan":
+                return "SK";
+            case "Alberta":
+                return "AB";
+            case "Newfoundland and Labrador":
+                return "NL";
+            case "Northwest Territories":
+                return "NT";
+            case "Yukon":
+                return "YT";
+            case "Nunavut":
+                return "NU";
+            default:
+                return ""; // Return empty string or handle invalid input appropriately
+        }
     }
 }
