@@ -34,7 +34,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         dataReceived(intent,v);
     }
-
     private void initUI() {
         /*** Edit Text ***/
         name = (EditText) findViewById(R.id.UserName);
