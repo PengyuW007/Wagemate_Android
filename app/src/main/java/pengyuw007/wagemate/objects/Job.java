@@ -10,9 +10,9 @@ public class Job {
     public Job(String URL,String Pos){
         this.URL = URL;
         Position = Pos;
-        Annual_Wage = -1;
-        Hour_Wage = -1;
-        Hours = -1;
+        Annual_Wage = 0;
+        Hour_Wage = 0;
+        Hours = 0;
     }
 
     public Job(){

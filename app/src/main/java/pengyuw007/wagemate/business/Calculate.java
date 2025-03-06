@@ -8,7 +8,7 @@ public class Calculate {
     public static double annual_wage(Job job, String province) {
         final int MONTH = 12;
         final int WEEK_MONTH = 4;
-        double res_annual_wage;
+        double res_annual_wage = 0;
         double federal_tax_rate;
         double provincial_tax_rate = 0;
 
@@ -17,8 +17,31 @@ public class Calculate {
 
         double hours = job.getHours();
         double hour_wage = job.getHour_Wage();
+        double annual_wage = job.getAnnual_Wage();
 
-        res_annual_wage = hours * hour_wage*MONTH*WEEK_MONTH;
+        if(hour_wage > 0 && hours > 0 && !Double.isNaN(hour_wage)&& !Double.isNaN(hours)){
+            res_annual_wage = hours * hour_wage * MONTH * WEEK_MONTH;
+
+            if (annual_wage > 0 && !Double.isNaN(annual_wage)) {
+                // If both calculated and inputted annual wage exist, check if they match
+                if (Math.abs(res_annual_wage - annual_wage) > 1) {  // Allow small float precision differences
+                    Log.w("SalaryCalculator", "Mismatch between inputted annual wage (" + annual_wage +
+                            ") and calculated annual wage (" + res_annual_wage + "). Please verify your input.");
+                }
+            }
+
+            // Set annual wage to the calculated value
+            job.setAnnual_Wage(res_annual_wage);
+            Log.i("SalaryCalculator", "Calculated and set annual wage: " + res_annual_wage);
+        }else if(annual_wage > 0 && !Double.isNaN(annual_wage)){
+            res_annual_wage = annual_wage;
+            job.setAnnual_Wage(res_annual_wage);
+            Log.i("SalaryCalculator", "Using provided annual wage: " + res_annual_wage);
+        }else{
+            res_annual_wage = 0;
+            job.setAnnual_Wage(res_annual_wage);
+            Log.e("SalaryCalculator", "Invalid input: Both hourly wage and annual wage are missing, zero, or NaN.");
+        }
 
         if (res_annual_wage <= 55867) {
             federal_tax_rate = 0.15;

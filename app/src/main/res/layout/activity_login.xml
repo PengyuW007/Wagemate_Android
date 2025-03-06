@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="5dp"
     tools:context=".presentation.LoginActivity">
 
@@ -14,25 +14,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="580dp"
         android:text="Account Login"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.633"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.127" />
 
     <EditText
         android:id="@+id/UserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter username"
-        android:minHeight="48dp"
-        android:singleLine="true"
-        android:imeOptions="actionNext"
-        android:nextFocusForward="@id/Password"
         android:layout_below="@+id/AccountLogin"
+        android:hint="Enter username"
+        android:imeOptions="actionNext"
+        android:minHeight="48dp"
+        android:nextFocusForward="@id/Password"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -44,11 +44,11 @@
         android:id="@+id/Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/AccountLogin"
         android:hint="Enter password"
+        android:imeOptions="actionNext"
         android:minHeight="48dp"
         android:singleLine="true"
-        android:imeOptions="actionNext"
-        android:layout_below="@+id/AccountLogin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -58,8 +58,8 @@
 
     <Button
         android:id="@+id/LoginButton"
-        android:layout_width="142dp"
-        android:layout_height="71dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/light_green"
         android:text="Login"
         android:textColor="@color/white"
@@ -73,8 +73,8 @@
 
     <Button
         android:id="@+id/GuestLoginButton"
-        android:layout_width="142dp"
-        android:layout_height="71dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/light_green"
         android:text="Guest Login"
         android:textColor="@color/white"
@@ -84,7 +84,7 @@
         app:layout_constraintHorizontal_bias="0.799"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintVertical_bias="0.77" />
 
     <TextView
         android:id="@+id/Create_new_user"
@@ -97,10 +97,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.192"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818" />
+        app:layout_constraintVertical_bias="0.874" />
 
     <TextView
         android:id="@+id/Forgot_password"
@@ -113,9 +113,9 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.754"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818" />
+        app:layout_constraintVertical_bias="0.874" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

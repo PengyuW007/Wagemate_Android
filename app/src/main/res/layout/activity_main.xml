@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/User_info"
-        android:hint="Enter weekly hours"
+        android:hint="Enter weekly work hours"
         android:imeOptions="actionNext"
         android:minHeight="48dp"
         android:nextFocusForward="@id/Password"
