@@ -1,5 +1,6 @@
 package pengyuw007.wagemate.persistence.real;
 
+import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.sql.Connection;
@@ -36,10 +37,10 @@ public class DataAccessReal implements IPersistenceAccess {
         String url;
         try {
             // Setup for HSQL
-            dbType = "HSQL";
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            url = "jdbc:hsqldb:file:" + dbPath; // stored on disk mode
-            c1 = DriverManager.getConnection(url, "SA", "");
+            dbType = "MySQL";
+            Class.forName("com.mysql.jdbc.Driver");
+            url = "jdbc:mysql://localhost/database01";
+            c1 = DriverManager.getConnection(url, "root", "123456");
             st1 = c1.createStatement();
             st2 = c1.createStatement();
             st3 = c1.createStatement();
@@ -80,6 +81,9 @@ public class DataAccessReal implements IPersistenceAccess {
              */
         } catch (Exception e) {
             processSQLError(e);
+//            System.out.println("SQLException: " + e.getMessage());
+//            System.out.println("SQLState: " + e.getSQLState());
+//            System.out.println("VendorError: " + e.getErrorCode());
         }
         System.out.println("Opened " + dbType + " database " + dbPath);
     }

@@ -57,4 +57,6 @@ dependencies {
 
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("com.mysql:mysql-connector-j:8.1.0")
 }
