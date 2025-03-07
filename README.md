@@ -1,7 +1,8 @@
 # WageMate
 
 ## Overview
-**WageMate** is a salary calculator designed to help users determine their **net annual salary** 
+When the job hunters are browsing the job market, some companies list the hourly wages, and rest of them 
+list the annual wage. Hence, **WageMate** is a salary calculator designed to help users determine their **net annual salary** 
 after tax deductions based on their **hourly wage, worked hours, or annual salary**. 
 The app automatically applies federal and provincial tax rates to provide an accurate estimate of take-home pay.
 
@@ -33,7 +34,7 @@ The app automatically applies federal and provincial tax rates to provide an acc
 
 2. Or enter your annual salary directly – the app will calculate the net salary after taxes.
 
-3. Select your province – the app applies the correct tax rates.
+3. Select your province (only allows Canadian provinces and territories)– the app applies the correct tax rates.
 
 4. View your net annual salary – after deductions for federal and provincial taxes.
 
